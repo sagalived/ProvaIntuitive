@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Busca de Operadoras</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="consulta" placeholder="Digite sua busca...">
+        <button @click="buscarOperadoras">Buscar</button>
+        <ul>
+            <li v-for="operadora in operadoras" :key="operadora.RegistroANS">
+                {{ operadora.RazaoSocial }} - {{ operadora.NomeFantasia }}
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                consulta: '',
+                operadoras: []
+            },
+            methods: {
+                buscarOperadoras() {
+                    axios.get('/buscar', { params: { consulta: this.consulta } })
+                        .then(response => {
+                            this.operadoras = response.data;
+                        });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
