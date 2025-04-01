@@ -30,7 +30,7 @@ CREATE TABLE DemonstracoesContabeis (
 );
 
 -- Importar dados do CSV para a tabela Operadoras
-LOAD DATA INFILE '/caminho/para/seu/arquivo/Operadoras.csv'
+LOAD DATA INFILE '/caminho/arquivo/Operadoras.csv'
 INTO TABLE Operadoras
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
@@ -38,7 +38,7 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
 -- Importar dados do CSV para a tabela DemonstracoesContabeis
-LOAD DATA INFILE '/caminho/para/seu/arquivo/DemonstracoesContabeis.csv'
+LOAD DATA INFILE '/caminho/arquivo/DemonstracoesContabeis.csv'
 INTO TABLE DemonstracoesContabeis
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
@@ -46,7 +46,6 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
 -- Queries analíticas
--- 10 operadoras com maiores despesas no último trimestre
 SELECT RegistroANS, SUM(VL_SALDO_FINAL) AS TotalDespesas
 FROM DemonstracoesContabeis
 WHERE DS_CONTA_CONTABIL = 'EVENTOS/SINISTROS CONHECIDOS OU AVISADOS DE ASSISTÊNCIA A SAÚDE MEDICO HOSPITALAR'
